@@ -1,14 +1,11 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Задачи</h1>
-
 <table>
   <tbody>
     <% @projects.each do |project| %>
       <tr>
         <h2><%= project.title %></h2>
-        <% @todos = project.todos %>
-          <% for i in @todos %>
+          <% for i in project.todos %>
           <li><%= i[:text]%></li>
         <%end %>
       </tr>
