@@ -1,29 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Projects</h1>
-
+<h1>Задачи</h1>
+<%= link_to '+', new_project_path %>
+<!--TODO переделать на флексы-->
 <table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Todo</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.title %></td>
-        <td><%= project.todos %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <h2><%= project.title %></h2>
+        <% @todos = project.todos %>
+          <% for i in @todos %>
+          <li><%= i[:text]%></li>
+        <%end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Project', new_project_path %>
+<div id="add_todo">
+<%= form_for :todo, url: todos_path do |form| %>
+  <div style="display: flex; align-items: center;">
+  <%= form.collection_select(:todo_id, @projects, :id, :title,{}, {:onChange=> "change();" }) %>
+  <p id="selected_text" style="padding: 3px; margin: 0px;"></p>
+  </div>
+  <%= form.text_field :text, placeholder: "Название задачи"%>
+  <%= form.submit %>
+<%end %>
+</div>
+<button onclick="hide()">Отмена</button>
+<button onclick="show()">OK</button>
