@@ -1,28 +1,45 @@
-<h1>Задачи</h1>
-<table>
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <h2><%= project.title %></h2>
-          <% for i in project.todos %>
-          <li><%= i[:text]%></li>
-        <%end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="blured">
 
-<br>
-<div id="add_todo">
-<%= form_for :todo, url: todos_path do |form| %>
-  <div style="display: flex; align-items: center;">
-  <%= form.collection_select(:todo_id, @projects, :id, :title,{}, {:onChange=> "change();" }) %>
-  <p id="selected_text" style="padding: 3px; margin: 0px;"></p>
-  </div>
-  <%= form.text_field :text, placeholder: "Название задачи"%>
-  <%= form.submit %>
-<%end %>
+<header>
+  <h1>Задачи</h1>
+  <a href="javascript:show()" ><img src="/assets/plus.png"></a>
+</header>
+
+<div id="table">
+
+    <% @projects.each do |project| %>
+      <div id="card">
+          <h2><%= project.title %></h2>
+
+            <% for i in project.todos %>
+
+              <div id="todos">
+                <%= link_to  type: check_box_tag( 'check',{},i[:isCompleted], remote: true) %>
+               <%= label_tag 'check', i[:text]%>
+              </div>
+
+          <%end %>
+      </div>
+  <% end %>
 </div>
-<button onclick="hide()">Отмена</button>
-<button onclick="show()">OK</button>
-<%= link_to '+', new_project_path %>
+
+</div>
+<div id="overlay">
+  <div id="add_todo">
+    <div id="title">
+      <h1>Новая Задача</h1>
+    </div>
+    <%= form_for :todo, url: todos_path do |form| %>
+      <div id="windinput">
+        <%=form.collection_select(:todo_id, @projects, :id, :title,{}) %>
+
+        <%= form.text_field :text, placeholder: "Название задачи"%> <br>
+      </div>
+      <div id="buttons">
+        <%= button_tag "ОТМЕНА", type:'button',class: 'close', onclick: 'hide()' %>
+        <%=form.submit 'OK', class: 'OK'%>
+      </div>
+
+    <%end %>
+  </div>
+</div>

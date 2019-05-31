@@ -14,22 +14,37 @@
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
+//= require 'icheck'
+//= require select2-full
 // $(document).ready(function() {
 //     $(document).on("click","#submit_link",function() {
 //         $('#form_submit_button').click();
 //     });
 // });
 $(document).ready(function() {
-    change()
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
+    });
+    $('#todo_todo_id').select2({
+        minimumResultsForSearch: -1
+    });
+    $("#check").change(function() {
+        var form = $(this).closest("#todos");
+
+        form.submit() // if you use the jquery form plugin http://jquery.malsup.com/form/
+
+        //or
+    })
 });
-function change() {
-    var e = document.getElementById("todo_todo_id");
-    var str = e.options[e.selectedIndex].text;
-    document.getElementById("selected_text").textContent = str;
-}
+
 function show() {
-    $('#add_todo').show();
+    $("#overlay").show();
+    $("#blured").css("filter", 'blur(3px)');
 }
 function hide() {
-    $('#add_todo').hide();
+    $('#overlay').hide();
+    $('#blured').css("filter", '');
 }
+
