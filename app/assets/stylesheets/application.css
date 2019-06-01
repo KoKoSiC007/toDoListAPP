@@ -87,7 +87,7 @@ header a{
 }
 #overlay{
     background: rgba(80,80,80,0.6);
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -102,7 +102,7 @@ header a{
     background: white;
     justify-items: center;
     border-radius: 2px;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -135,7 +135,10 @@ header a{
 /*    background: #cacfd1;*/
 /*    text-decoration: none;*/
 /*}*/
+
 .close {
+    margin: 0 5px 5px 5px;
+    width: 193px;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -182,6 +185,8 @@ header a{
 /*    text-decoration: none;*/
 /*}*/
 .OK {
+    margin: 0 5px 5px -1px;
+    width: 193px;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -214,8 +219,7 @@ header a{
 }
 
 #buttons{
-    display: grid;
-    grid-template-columns: 50% 50%;
+    display: flex;
 }
 .select2-selection, .select2-selection__rendered, .select2-selection__arrow {
     height: 40px !important;
