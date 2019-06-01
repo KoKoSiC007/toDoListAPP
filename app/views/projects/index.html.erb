@@ -33,7 +33,7 @@
     </div>
     <%= form_for :todo, url: todos_path do |form| %>
       <div id="windinput">
-        <%=form.collection_select(:todo_id, @projects, :id, :title,{}) %>
+        <%=form.collection_select(:todo_id, @projects, :id, :title,{:prompt => "Категория"}) %>
 
         <%= form.text_field :text, placeholder: "Название задачи"%> <br>
       </div>

@@ -25,20 +25,17 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.json
   def create
-    @todo = Todo.new(text: params[:todo][:text], isCompleted: false, project_id: params[:todo][:todo_id])
-    @todo.save
+    puts params[:todo][:todo_id]
+    if params[:todo][:todo_id]
+      @todo = Todo.new(text: params[:todo][:text], isCompleted: false, project_id: params[:todo][:todo_id])
+      @todo.save
+    end
     redirect_back(fallback_location: root_path)
   end
 
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
-
-    # puts params[:id]
-    @arr = Todo.find(params[:id])
-    puts !@arr.isCompleted
-
-    # @todo = Todo.new(te)
 
     respond_to do |format|
       if @todo.update(text: Todo.find(params[:id]).text, isCompleted: !Todo.find(params[:id]).isCompleted)
