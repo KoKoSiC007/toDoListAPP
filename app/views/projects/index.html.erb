@@ -4,23 +4,25 @@
   <h1>Задачи</h1>
   <a href="javascript:show()" ><img src="/assets/plus.png"></a>
 </header>
+<script>
 
+
+</script>
 <div id="table">
 
-    <% @projects.each do |project| %>
-      <div id="card">
-          <h2><%= project.title %></h2>
-
+          <% @projects.each do |project| %>
+          <div id="card">
+            <h2><%= project.title %></h2>
             <% for i in project.todos %>
+                <%= form_for :todo, :html => {:class => 'todos', :value => i.id, } do |f| %>
+                <%= f.check_box i.id, {checked: i[:isCompleted],id: i.id}   %>
+                <%= f.label i.id , i[:text]%>
+                  <%end %>
+            <%end %>
+          </div>
 
-              <div id="todos">
-                <%= link_to  type: check_box_tag( 'check',{},i[:isCompleted], remote: true) %>
-               <%= label_tag 'check', i[:text]%>
-              </div>
+<%end %>
 
-          <%end %>
-      </div>
-  <% end %>
 </div>
 
 </div>

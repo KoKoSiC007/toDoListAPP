@@ -33,8 +33,15 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
+
+    # puts params[:id]
+    @arr = Todo.find(params[:id])
+    puts !@arr.isCompleted
+
+    # @todo = Todo.new(te)
+
     respond_to do |format|
-      if @todo.update(todo_params)
+      if @todo.update(text: Todo.find(params[:id]).text, isCompleted: !Todo.find(params[:id]).isCompleted)
         format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
         format.json { render :show, status: :ok, location: @todo }
       else

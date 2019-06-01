@@ -14,29 +14,40 @@
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
-//= require 'icheck'
-//= require select2-full
+//= require 'vendor/icheck'
+//= require vendor/select2-full
 // $(document).ready(function() {
 //     $(document).on("click","#submit_link",function() {
 //         $('#form_submit_button').click();
 //     });
 // });
 $(document).ready(function() {
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '20%' // optional
-    });
+
+
     $('#todo_todo_id').select2({
         minimumResultsForSearch: -1
     });
-    $("#check").change(function() {
-        var form = $(this).closest("#todos");
 
-        form.submit() // if you use the jquery form plugin http://jquery.malsup.com/form/
 
-        //or
-    })
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%', // optional
+    });
+
+    $('input').on('ifChanged', function(event){
+        console.log(this.id);
+        console.log(this.checked);
+        $.ajax({
+            type: "put",
+            url: "todos/"+ this.id,
+            data: this.id,
+            success: function(msg){
+                alert( "Прибыли данные: " + msg );
+            }
+        });
+    });
+
 });
 
 function show() {
