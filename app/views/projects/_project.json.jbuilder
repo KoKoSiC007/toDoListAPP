@@ -1,2 +1,2 @@
-json.extract! project, :id, :title, :todo_id, :created_at, :updated_at
+json.extract! project, :id, :title, :todos
 json.url project_url(project, format: :json)
